@@ -8,4 +8,8 @@ void TaskOneTwo()
     {
         Console.WriteLine(num + " ");
     }
+    
+    List<int> distinct = list.Distinct().ToList();
+ 
+    Console.WriteLine(String.Join(",", distinct));
 }
