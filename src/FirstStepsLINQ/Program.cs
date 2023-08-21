@@ -1,4 +1,4 @@
-﻿TaskOneTwo();
+﻿TaskThreeFour();
 
 void TaskOneTwo()
 {
@@ -12,4 +12,12 @@ void TaskOneTwo()
     List<int> distinct = list.Distinct().ToList();
  
     Console.WriteLine(String.Join(",", distinct));
+}
+
+void TaskThreeFour()
+{
+    var path = @"C:\Users\d1810\Рабочий стол\линк\test.txt";
+    var lines = File.ReadAllLines(path);
+    var found = lines.Where(line => line.Contains("понимаешь", StringComparison.InvariantCultureIgnoreCase) );
+    
 }
