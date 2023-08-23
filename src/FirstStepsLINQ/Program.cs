@@ -1,4 +1,7 @@
-﻿TaskThreeFour();
+﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
+
+TaskFive();
 
 void TaskOneTwo()
 {
@@ -19,6 +22,71 @@ void TaskThreeFour()
     var path = @"C:\Users\d1810\Рабочий стол\линк\test.txt";
     var lines = File.ReadAllLines(path);
     var found = lines.Where(line => line.Contains("понимаешь", StringComparison.InvariantCultureIgnoreCase) );
-
     var foundd = lines.FirstOrDefault(line => line.Contains("мир", StringComparison.InvariantCultureIgnoreCase));
+}
+
+void TaskFive()
+{
+    var pathFirst = @"C:\Users\d1810\Рабочий стол\текста\file1.txt";
+    var pathSecond = @"C:\Users\d1810\Рабочий стол\текста\file2.txt";
+    var textFirst = File.ReadAllLines(pathFirst);
+    var textSecond = File.ReadAllLines(pathSecond);
+    List<string> text = textFirst.Union(textSecond).ToList();
+    var textFinishd = GetSortList(text);
+    var splitedText = GetSplitedList(text);
+    List<List<string>> textFinish = null;
+
+    
+    foreach (var line in splitedText)
+        {
+
+            textFinish = splitedText.OrderBy(line => Convert.ToInt32(line[0])).ToList();
+
+        }
+    
+
+    var textFinishf = GetConcatenatedText(textFinish);
+    foreach (var line in textFinishf)
+    {
+        Console.WriteLine(line);
+    }
+    
+
+    List<List <string>> GetSplitedList(IEnumerable<string> text)
+    {
+        List<List<string>> list = new List<List<string>>();
+        foreach (var line in text)
+        { 
+            var splitedLine = line.Split("|");
+            list.Add(splitedLine.ToList());
+        }
+
+        return list;
+    }
+
+    List<string> GetConcatenatedText(List<List<string>> text)
+    {
+        List<string> list = new List<string>();
+        foreach (var line in text)
+        {
+            var firstElement = line[0];
+            var secondElement = line[1];
+            var concatenatedLine = firstElement + "|" + secondElement;
+            list.Add(concatenatedLine);
+        }
+
+        return list;
+    }
+
+    List<string> GetSortList(List<string> text)
+    {
+        text = text.Distinct().ToList();
+
+        return text;
+    }
+
+
+
+
+
 }
